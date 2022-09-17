@@ -41,19 +41,21 @@ class _RandomWordsState extends State<RandomWords> {
         return ListView.builder(
             padding: const EdgeInsets.all(16.0),
             itemBuilder: (context, i) {
-                if (i.isOdd) return const Divider();
-                final index = i ~/ 2;
-                if (index >= _suggestions.length) {
+                if (i.isOdd) {
+                    return SizedBox(height: 10);
+                }
+                i = i ~/ 2;
+                if (i >= _suggestions.length) {
                     _suggestions.addAll(generateWordPairs().take(10));
                 }
                 return Card(
-                        shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.all(Radius.circular(30)),
-                        ),
+                    shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.all(Radius.circular(30)),
+                    ),
                     child: Padding(
                         padding: EdgeInsets.all(12),
                         child: Text(
-                            _suggestions[index].asPascalCase,
+                            _suggestions[i].asPascalCase,
                             style: _biggerFont,
                         ),
                     ),
