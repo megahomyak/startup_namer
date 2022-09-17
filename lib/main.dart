@@ -35,6 +35,7 @@ class RandomWords extends StatefulWidget {
 class _RandomWordsState extends State<RandomWords> {
     final _suggestions = <WordPair>[];
     final _biggerFont = const TextStyle(fontSize: 18);
+    final _saved = <WordPair>{};
 
     @override
     Widget build(BuildContext context) {
@@ -48,15 +49,20 @@ class _RandomWordsState extends State<RandomWords> {
                 if (i >= _suggestions.length) {
                     _suggestions.addAll(generateWordPairs().take(10));
                 }
+                final alreadySaved = _saved.contains(_suggestions[i]);
                 return Card(
                     shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.all(Radius.circular(30)),
                     ),
-                    child: Padding(
-                        padding: EdgeInsets.all(12),
-                        child: Text(
+                    child: ListTile(
+                        title: Text(
                             _suggestions[i].asPascalCase,
                             style: _biggerFont,
+                        ),
+                        trailing: Icon(
+                            alreadySaved ? Icons.favorite : Icons.favorite_border,
+                            color: alreadySaved ? Colors.red : null,
+                            semanticLabel: alreadySaved ? 'Remove from saved' : 'Save',
                         ),
                     ),
                     elevation: 10,
