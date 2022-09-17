@@ -46,11 +46,18 @@ class _RandomWordsState extends State<RandomWords> {
                 if (index >= _suggestions.length) {
                     _suggestions.addAll(generateWordPairs().take(10));
                 }
-                return ListTile(
-                    title: Text(
-                        _suggestions[index].asPascalCase,
-                        style: _biggerFont,
-                    )
+                return Card(
+                        shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.all(Radius.circular(30)),
+                        ),
+                    child: Padding(
+                        padding: EdgeInsets.all(12),
+                        child: Text(
+                            _suggestions[index].asPascalCase,
+                            style: _biggerFont,
+                        ),
+                    ),
+                    elevation: 10,
                 );
             }
         );
