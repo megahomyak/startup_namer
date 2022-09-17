@@ -59,20 +59,22 @@ class _RandomWordsState extends State<RandomWords> {
                             _suggestions[i].asPascalCase,
                             style: _biggerFont,
                         ),
-                        trailing: Icon(
-                            alreadySaved ? Icons.favorite : Icons.favorite_border,
-                            color: alreadySaved ? Colors.red : null,
-                            semanticLabel: alreadySaved ? 'Remove from saved' : 'Save',
-                        ),
-                        onTap: () {
-                            setState(() {
-                                if (alreadySaved) {
-                                    _saved.remove(_suggestions[i]);
-                                } else {
-                                    _saved.add(_suggestions[i]);
-                                }
-                            });
-                        }
+                        trailing: IconButton(
+                            icon: Icon(
+                                alreadySaved ? Icons.favorite : Icons.favorite_border,
+                                color: alreadySaved ? Colors.red : null,
+                                semanticLabel: alreadySaved ? 'Remove from saved' : 'Save',
+                            ),
+                            onPressed: () {
+                                setState(() {
+                                    if (alreadySaved) {
+                                        _saved.remove(_suggestions[i]);
+                                    } else {
+                                        _saved.add(_suggestions[i]);
+                                    }
+                                });
+                            }
+                        )
                     ),
                     elevation: 10,
                 );
